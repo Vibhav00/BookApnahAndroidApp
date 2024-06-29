@@ -110,9 +110,6 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
 
 
-    // Coil
-//    implementation "io.coil-kt:coil:1.1.1"
-
 
     implementation ("io.coil-kt:coil-compose:2.0.0")
     implementation ("com.google.accompanist:accompanist-coil:0.10.0")
