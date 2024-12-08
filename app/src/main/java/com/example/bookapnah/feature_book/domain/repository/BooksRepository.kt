@@ -36,6 +36,11 @@ interface BooksRepository {
         token:String
     ):AddCartResDto
 
+    suspend fun  removeFromCart(
+        name: String,
+        token:String
+    ):Unit
+
     suspend fun  getAllCart(
         token:String
     ):CartBooks

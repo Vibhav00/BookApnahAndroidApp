@@ -13,13 +13,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewModelScope
 import androidx.palette.graphics.Palette
 import com.example.bookapnah.core.domain.common.Resource
+import com.example.bookapnah.feature_book.domain.model.CartItem
+import com.example.bookapnah.feature_book.domain.user_cases.add_to_cart.RemoveFromCartUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 
 @HiltViewModel
 class CartBooksViewModel @Inject constructor(
-    val getAllCartItemsUseCase: GetAllCartItemsUseCase
+    val getAllCartItemsUseCase: GetAllCartItemsUseCase,
+    val removeFromCartUseCase: RemoveFromCartUseCase
 ) : ViewModel() {
 
 
@@ -28,6 +31,8 @@ class CartBooksViewModel @Inject constructor(
 
     // immutable public version of the book state
     val stateBook: State<CartBookState> = _stateBook
+
+
 
     init {
         getAllCartBooks()
@@ -63,6 +68,45 @@ class CartBooksViewModel @Inject constructor(
         }.launchIn(viewModelScope)
 
     }
+
+
+    fun removeCartBook(cartItem: CartItem) {
+        removeFromCartUseCase(cartItem).onEach { result ->
+            when (result) {
+                is Resource.Success -> {
+
+                        val resBook = stateBook.value.books.filter {book->
+                            book.name != cartItem.name
+                        }
+
+                    _stateBook.value =   stateBook.value.copy(
+                            books = resBook
+                        )
+                }
+
+                is Resource.Error -> {
+                    _stateBook.value =
+                        stateBook.value.copy(
+                            error = "got some error "
+                        )
+
+                }
+
+                is Resource.Loading -> {
+                    _stateBook.value =
+                        stateBook.value.copy(
+                            isLoading = true
+                        )
+
+                }
+            }
+        }.launchIn(viewModelScope)
+
+    }
+
+
+
+
 
 
     // function to calculate dominant color

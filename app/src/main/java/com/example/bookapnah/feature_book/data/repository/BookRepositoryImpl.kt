@@ -35,6 +35,10 @@ class BookRepositoryImpl @Inject constructor(
        return  api.addToCart(cartItem,token)
      }
 
+    override suspend fun removeFromCart(name:String, token: String) {
+        return api.removeFromCart(name,token)
+    }
+
     override suspend fun getAllCart(token: String): CartBooks {
         return  api.getAllCartItems(token)
     }

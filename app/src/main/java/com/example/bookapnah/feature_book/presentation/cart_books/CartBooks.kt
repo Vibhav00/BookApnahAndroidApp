@@ -1,5 +1,7 @@
 package com.example.bookapnah.feature_book.presentation.cart_books
 
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,6 +19,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.bookapnah.feature_book.data.remote.dto.cart.toCartItem
 import com.example.bookapnah.feature_book.presentation.cart_books.components.BookItemCart
 import com.example.bookapnah.ui.theme.Roboto
 import com.example.bookapnah.ui.theme.TypeIce
@@ -58,7 +61,10 @@ fun CartBook(
         )
 
         bookList.forEach {
-            BookItemCart(cartItemRes = it)
+            BookItemCart(cartItemRes = it , onDeleteClick = {
+                Log.e("thisis0","clicked ")
+                viewModel.removeCartBook(it.toCartItem())
+            })
         }
 
     }

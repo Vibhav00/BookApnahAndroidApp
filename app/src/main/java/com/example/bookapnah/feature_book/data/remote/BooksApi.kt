@@ -5,6 +5,7 @@ import com.example.bookapnah.feature_book.data.remote.dto.books.BookResDto
 import com.example.bookapnah.feature_book.data.remote.dto.cart.CartBooks
 import com.example.bookapnah.feature_book.domain.model.CartItem
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -44,6 +45,13 @@ interface BooksApi {
         @Query("token")
         token:String,
     ):CartBooks
+
+    @DELETE("/users/deleteCartItem")
+    suspend fun removeFromCart(
+        @Query("name") bookName:String,
+        @Query("token")
+        token:String,
+    ):Unit
 
 
 }
