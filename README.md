@@ -70,16 +70,8 @@ discover and purchase your favorite books! 📖✨
 
 ## video 📺💻
 
-<div align="center">
-<div  width="50%" >
 https://github.com/user-attachments/assets/118e9626-3678-414f-beb9-ddd18fa5d2f0
   
-</div>
-
-</div>
-
-
-
 ---
 
 ## Backend 🌍🌐⚠️⛔
